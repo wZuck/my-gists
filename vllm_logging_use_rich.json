@@ -1,0 +1,40 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "rich_formatter": {
+            "format": "%(message)s",
+            "datefmt": "[%X]"
+        }
+    },
+    "handlers": {
+        "rich_handler": {
+            "class": "rich.logging.RichHandler",
+            "level": "INFO",
+            "formatter": "rich_formatter",
+            "markup": true,
+            "rich_tracebacks": true,
+            "tracebacks_show_locals": true,
+            "tracebacks_suppress": ["click", "django"],
+            "show_path": false,
+            "tracebacks_extra_lines": 5,
+            "tracebacks_theme": "monokai",
+            "log_time_format": "[%x %X]"
+        }
+    },
+    "loggers": {
+        "vllm": {
+            "handlers": ["rich_handler"],
+            "level": "INFO",
+            "propagate": false
+        },
+        "vllm.engine": {
+            "level": "INFO",
+            "propagate": true
+        }
+    },
+    "root": {
+        "level": "INFO",
+        "handlers": ["rich_handler"]
+    }
+}
